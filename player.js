@@ -5,95 +5,82 @@ let songs=[]
 let names=[]
 let index=0
 
+// 카테고리 로드 함수
 async function loadCategory(folder){
+    const api=`https://api.github.com/repos/${user}/${repo}/contents/${folder}`
+    const res=await fetch(api)
+    const data=await res.json()
 
-const api=`https://api.github.com/repos/${user}/${repo}/contents/${folder}`
+    songs=[]
+    names=[]
+    let html=""
 
-const res=await fetch(api)
-const data=await res.json()
+    data.forEach(file=>{
+        if(file.name.endsWith(".mp3")||file.name.endsWith(".flac")){
+            const url=`https://cdn.jsdelivr.net/gh/${user}/${repo}@main/${folder}/${file.name}`
+            songs.push(url)
+            names.push(file.name)
+            html+=`<div class="song" onclick="play(${songs.length-1})">${file.name}</div>`
+        }
+    })
 
-songs=[]
-names=[]
-
-let html=""
-
-data.forEach(file=>{
-
-if(file.name.endsWith(".mp3")||file.name.endsWith(".flac")){
-
-const url=`https://cdn.jsdelivr.net/gh/${user}/${repo}@main/${folder}/${file.name}`
-
-songs.push(url)
-names.push(file.name)
-
-html+=`<div class="song" onclick="play(${songs.length-1})">${file.name}</div>`
-
+    document.getElementById("playlist").innerHTML=html
+    // 리스트가 바뀌면 스크롤을 맨 위로 올립니다.
+    document.getElementById("playlist").scrollTop = 0;
 }
 
-})
-
-document.getElementById("playlist").innerHTML=html
-
+// 버튼 활성화 색상 유지 함수
+function setActive(id) {
+    const buttons = document.querySelectorAll('.menu button');
+    buttons.forEach(btn => btn.classList.remove('active')); // 모든 버튼에서 파란색 제거
+    document.getElementById(id).classList.add('active'); // 클릭한 버튼만 파란색 추가
 }
 
 function play(i){
+    index=i
+    const player=document.getElementById("player")
+    player.src=songs[index]
+    player.play()
+    
+    // 현재 재생 중인 곡 표시 (선택 사항)
+    updatePlaylistHighlight();
+}
 
-index=i
-const player=document.getElementById("player")
-
-player.src=songs[index]
-player.play()
-
+// 리스트에서 현재 재생곡 강조
+function updatePlaylistHighlight() {
+    const songDivs = document.querySelectorAll('.song');
+    songDivs.forEach((div, i) => {
+        if(i === index) div.classList.add('active');
+        else div.classList.remove('active');
+    });
 }
 
 function nextSong(){
-
-index++
-
-if(index>=songs.length)
-index=0
-
-play(index)
-
+    index++
+    if(index>=songs.length) index=0
+    play(index)
 }
 
 function prevSong(){
-
-index--
-
-if(index<0)
-index=songs.length-1
-
-play(index)
-
+    index--
+    if(index<0) index=songs.length-1
+    play(index)
 }
 
 function randomSong(){
-
-index=Math.floor(Math.random()*songs.length)
-
-play(index)
-
+    index=Math.floor(Math.random()*songs.length)
+    play(index)
 }
 
 function searchSong(){
-
-let input=document.getElementById("search").value.toLowerCase()
-
-let html=""
-
-names.forEach((name,i)=>{
-
-if(name.toLowerCase().includes(input)){
-
-html+=`<div class="song" onclick="play(${i})">${name}</div>`
-
-}
-
-})
-
-document.getElementById("playlist").innerHTML=html
-
+    let input=document.getElementById("search").value.toLowerCase()
+    let html=""
+    names.forEach((name,i)=>{
+        if(name.toLowerCase().includes(input)){
+            html+=`<div class="song" onclick="play(${i})">${name}</div>`
+        }
+    })
+    document.getElementById("playlist").innerHTML=html
 }
 
 document.getElementById("player").addEventListener("ended",nextSong)

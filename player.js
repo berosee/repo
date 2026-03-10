@@ -9,6 +9,7 @@ async function loadCategory(folder){
     // 클릭한 버튼 활성화 스타일 적용
     setActiveButton(folder);
 
+    // 아래 줄의 주소 부분을 정확히 수정했습니다.
     const api=`https://api.github.com/repos/${user}/${repo}/contents/${folder}`
     const res=await fetch(api)
     const data=await res.json()
@@ -19,7 +20,8 @@ async function loadCategory(folder){
 
     data.forEach(file=>{
         if(file.name.endsWith(".mp3")||file.name.endsWith(".flac")){
-            const url=`https://cdn.jsdelivr.gh/${user}/${repo}@main/${folder}/${file.name}`
+            // 이 부분의 .net/gh 경로를 수정했습니다.
+            const url=`https://cdn.jsdelivr.net/gh/${user}/${repo}@main/${folder}/${file.name}`
             songs.push(url)
             names.push(file.name)
             html+=`<div class="song" onclick="play(${songs.length-1})">${file.name}</div>`
@@ -28,14 +30,13 @@ async function loadCategory(folder){
     document.getElementById("playlist").innerHTML=html
 }
 
-// 카테고리 버튼 활성화 스타일 처리
 function setActiveButton(folderId) {
     const buttons = document.querySelectorAll('.menu button');
-    buttons.forEach(btn => btn.classList.remove('active')); // 모든 버튼에서 active 제거
+    buttons.forEach(btn => btn.classList.remove('active'));
     
     const activeBtn = document.getElementById(folderId);
     if(activeBtn) {
-        activeBtn.classList.add('active'); // 클릭한 버튼에 active 추가
+        activeBtn.classList.add('active');
     }
 }
 
@@ -45,7 +46,6 @@ function play(i){
     player.src=songs[index]
     player.play()
     
-    // 현재 곡 강조
     const songDivs = document.querySelectorAll('.song');
     songDivs.forEach((div, idx) => {
         if(idx === i) div.classList.add('playing');
@@ -69,7 +69,5 @@ function randomSong(){
     index=Math.floor(Math.random()*songs.length);
     play(index);
 }
-
-// 검색 함수는 삭제되었습니다.
 
 document.getElementById("player").addEventListener("ended", nextSong);

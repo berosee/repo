@@ -1,5 +1,5 @@
-const user="YOUR_GITHUB_ID"
-const repo="music-server"
+const user="repo"
+const repo="music"
 
 let songs=[]
 let names=[]

@@ -2,19 +2,17 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>repo</title>
+<title>Music Player</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
 
-<h2 class="title">repo</h2>
-
 <div class="menu">
-<button id="old" onclick="loadCategory('old');setActive('old')">OLD</button>
-<button id="enka" onclick="loadCategory('enka');setActive('enka')">ENKA</button>
-<button id="jazz" onclick="loadCategory('jazz');setActive('jazz')">JAZZ</button>
+<button id="old" onclick="loadCategory('old')">OLD</button>
+<button id="enka" onclick="loadCategory('enka')">ENKA</button>
+<button id="jazz" onclick="loadCategory('jazz')">JAZZ</button>
 </div>
 
 <audio id="player" controls></audio>
@@ -29,10 +27,9 @@
 
 <script src="player.js"></script>
 <script>
-// 페이지가 열리면 OLD 리스트를 불러오고 버튼을 파란색으로 설정합니다.
+// 화면 시작 시 'old' 리스트를 불러오고 버튼을 활성화합니다.
 window.onload = function() {
     loadCategory('old');
-    setActive('old');
 };
 </script>
 

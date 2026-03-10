@@ -30,6 +30,12 @@
 <div id="playlist"></div>
 
 <script src="player.js"></script>
-
+<script>
+    // 페이지 로드 시 'OLD' 카테고리를 자동으로 실행합니다.
+    window.onload = function() {
+        loadCategory('old');
+        setActive('old');
+    };
+</script>
 </body>
 </html>

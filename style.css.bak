@@ -85,32 +85,5 @@ font-size:18px;
 width:80%;
 font-size:18px;
 }
-}
-/* 모바일 전용 확대 */
-@media (max-width:700px){
-
-body{
-font-size:20px;
-}
-
-.song{
-font-size:20px;
-}
-
-.menu button{
-font-size:20px;
-padding:14px 26px;
-}
-
-#search{
-font-size:20px;
-width:85%;
-}
-
-/* 플레이어 시간 글씨 크게 */
-audio{
-width:95%;
-height:55px;
-}
 
 }

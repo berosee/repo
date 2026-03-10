@@ -6,9 +6,27 @@ text-align:center;
 }
 
 .menu button{
-padding:10px 20px;
-margin:5px;
+
+padding:12px 22px;
+margin:6px;
 font-size:18px;
+
+border-radius:20px;
+border:none;
+
+background:#444;
+color:white;
+
+cursor:pointer;
+
+}
+
+.menu button:hover{
+background:#666;
+}
+
+.menu button.active{
+background:#2b6cff;
 }
 
 audio{
@@ -41,4 +59,31 @@ background:#333;
 margin-top:10px;
 padding:8px;
 width:250px;
+}
+audio{
+width:60%;
+max-width:700px;
+margin:20px;
+}
+
+@media (max-width:700px){
+
+audio{
+width:95%;
+}
+
+.menu button{
+font-size:20px;
+padding:14px 24px;
+}
+
+.song{
+font-size:18px;
+}
+
+#search{
+width:80%;
+font-size:18px;
+}
+
 }

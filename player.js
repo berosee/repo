@@ -1,5 +1,5 @@
-const user="repo"
-const repo="music-server"
+const user="berosee"
+const repo="repo"
 
 let songs=[]
 let names=[]

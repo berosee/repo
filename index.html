@@ -11,9 +11,9 @@
 <h2>repo</h2>
 
 <div class="menu">
-<button onclick="loadCategory('old')">OLD</button>
-<button onclick="loadCategory('enka')">ENKA</button>
-<button onclick="loadCategory('jazz')">JAZZ</button>
+<button id="old" onclick="loadCategory('old');setActive('old')">OLD</button>
+<button id="enka" onclick="loadCategory('enka');setActive('enka')">ENKA</button>
+<button id="jazz" onclick="loadCategory('jazz');setActive('jazz')">JAZZ</button>
 </div>
 
 <audio id="player" controls></audio>

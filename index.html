@@ -2,132 +2,33 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>CDN Music Player</title>
-
-<style>
-
-body{
-background:#111;
-color:white;
-font-family:Arial;
-text-align:center;
-}
-
-button{
-padding:10px 20px;
-margin:5px;
-font-size:18px;
-}
-
-#playlist{
-height:350px;
-overflow:auto;
-border:1px solid #333;
-margin-top:20px;
-}
-
-.song{
-padding:6px;
-cursor:pointer;
-}
-
-.song:hover{
-background:#333;
-}
-
-</style>
+<title>repo</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h2>My CDN Music</h2>
+<h2>repo</h2>
 
+<div class="menu">
 <button onclick="loadCategory('old')">OLD</button>
 <button onclick="loadCategory('enka')">ENKA</button>
 <button onclick="loadCategory('jazz')">JAZZ</button>
+</div>
 
-<br><br>
+<audio id="player" controls></audio>
 
-<audio id="player" controls style="width:80%"></audio>
+<div class="controls">
+<button onclick="prevSong()">◀ 이전</button>
+<button onclick="nextSong()">다음 ▶</button>
+<button onclick="randomSong()">랜덤</button>
+</div>
 
-<br><br>
-
-<button onclick="prevSong()">◀ 이전곡</button>
-<button onclick="nextSong()">다음곡 ▶</button>
+<input type="text" id="search" placeholder="곡 검색" onkeyup="searchSong()">
 
 <div id="playlist"></div>
 
-<script>
-
-const user="YOUR_ID"
-const repo="music"
-
-let songs=[]
-let index=0
-
-async function loadCategory(folder){
-
-const api=`https://api.github.com/repos/${user}/${repo}/contents/${folder}`
-
-const res=await fetch(api)
-const data=await res.json()
-
-songs=[]
-let html=""
-
-data.forEach(file=>{
-
-if(file.name.endsWith(".mp3")||file.name.endsWith(".flac")){
-
-const cdn=`https://cdn.jsdelivr.net/gh/${user}/${repo}@main/${folder}/${file.name}`
-
-songs.push(cdn)
-
-html+=`<div class="song" onclick="play(${songs.length-1})">${file.name}</div>`
-
-}
-
-})
-
-document.getElementById("playlist").innerHTML=html
-
-}
-
-function play(i){
-
-index=i
-
-const player=document.getElementById("player")
-
-player.src=songs[index]
-
-player.play()
-
-}
-
-function nextSong(){
-
-index++
-
-if(index>=songs.length) index=0
-
-play(index)
-
-}
-
-function prevSong(){
-
-index--
-
-if(index<0) index=songs.length-1
-
-play(index)
-
-}
-
-document.getElementById("player").addEventListener("ended",nextSong)
-
-</script>
+<script src="player.js"></script>
 
 </body>
 </html>

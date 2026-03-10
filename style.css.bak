@@ -1,95 +1,111 @@
 body{
-background:#111;
-color:white;
-font-family:Arial;
-text-align:center;
+    background:#111;
+    color:white;
+    font-family: 'Malgun Gothic', sans-serif; /* 한국어 가독성을 위해 추가 */
+    text-align:center;
+    margin: 0;
+    padding: 10px;
 }
 
 .menu button{
-
-padding:12px 22px;
-margin:6px;
-font-size:18px;
-
-border-radius:20px;
-border:none;
-
-background:#444;
-color:white;
-
-cursor:pointer;
-
+    padding:12px 22px;
+    margin:6px;
+    font-size:18px;
+    border-radius:10px; /* 조금 더 각진 형태로 변경 */
+    border:none;
+    background:#444;
+    color:white;
+    cursor:pointer;
+    transition: 0.3s;
 }
 
-.menu button:hover{
-background:#666;
-}
-
+/* 버튼 클릭(활성화) 시 파란색 유지 */
 .menu button.active{
-background:#2b6cff;
+    background:#2b6cff !important;
+    font-weight: bold;
 }
 
 audio{
-width:80%;
-margin:15px;
+    width:90%;
+    margin:20px auto;
+    height: 54px; /* 플레이어 높이 키움 */
 }
 
 .controls button{
-padding:8px 16px;
-margin:5px;
+    padding:12px 20px;
+    margin:5px;
+    font-size: 16px;
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 5px;
 }
 
 #playlist{
-height:350px;
-overflow:auto;
-border:1px solid #333;
-margin-top:20px;
+    height: 400px; /* 리스트 영역을 더 넓게 */
+    overflow-y: scroll;
+    border:1px solid #333;
+    margin-top:20px;
+    background: #1a1a1a;
 }
 
 .song{
-padding:6px;
-cursor:pointer;
+    padding:15px; /* 터치하기 쉽게 간격 넓힘 */
+    border-bottom: 1px solid #222;
+    cursor:pointer;
+    font-size: 16px;
 }
 
 .song:hover{
-background:#333;
+    background:#333;
+}
+
+/* 재생 중인 곡 스타일 */
+.song.active {
+    color: #2b6cff;
+    font-weight: bold;
+    background: #222;
 }
 
 #search{
-margin-top:10px;
-padding:8px;
-width:250px;
-}
-audio{
-width:60%;
-max-width:700px;
-margin:20px;
+    margin-top:15px;
+    padding:12px;
+    width:80%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #222;
+    color: white;
 }
 
+/* 모바일 전용 설정 (가장 중요) */
 @media (max-width:700px){
+    h2 { font-size: 30px; }
+    
+    .menu button{
+        font-size:24px; /* 버튼 글자 크기 대폭 확대 */
+        padding:18px 30px;
+        width: 28%; /* 버튼을 가로로 정렬 */
+    }
 
-audio{
-width:95%;
-}
+    .song{
+        font-size:22px; /* 곡 제목 글자 대폭 확대 */
+        padding: 20px 10px;
+    }
 
-.menu button{
-font-size:20px;
-padding:14px 24px;
-}
+    .controls button {
+        font-size: 20px;
+        padding: 15px 25px;
+    }
 
-.song{
-font-size:18px;
-}
-
-#search{
-width:80%;
-font-size:18px;
-}
-}
-.song.active{
-
-background:#2b6cff;
-color:white;
-font-weight:bold;
-
+    #search{
+        width:90%;
+        font-size:22px; /* 검색창 글자 확대 */
+        padding: 15px;
+    }
+    
+    audio {
+        width: 100%;
+        transform: scale(1.1); /* 플레이어 자체를 약간 키움 */
+    }
 }

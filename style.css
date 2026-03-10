@@ -5,7 +5,7 @@ body{
     text-align:center;
     margin: 0;
     padding: 0;
-    padding-top: 10px; /* 상단 여백 추가 */
+    padding-top: 20px; /* 상단 여백 추가 */
 }
 
 /* 2. 카테고리 버튼 사이즈 및 폰트 축소 */

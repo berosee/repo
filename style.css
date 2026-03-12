@@ -1,18 +1,29 @@
-body{
-    background:#111;
-    color:white;
+body {
+    background: #111;
+    color: white;
     font-family: Arial, sans-serif;
-    text-align:center;
+    text-align: center;
     margin: 0;
     padding: 0;
-    padding-top: 20px; /* 상단 여백 추가 */
+    padding-top: 20px;
 }
 
-/* 2. 카테고리 버튼 사이즈 및 폰트 축소 */
-.menu button{
-    padding: 8px 15px; /* 크기 축소 */
-    margin: 3px;       /* 간격 축소 */
-    font-size: 14px;  /* 폰트 축소 */
+/* PC에서 전체적인 균형을 잡아주는 컨테이너 설정 */
+.menu, .controls, #playlist, audio {
+    max-width: 600px; /* PC에서 너무 퍼지지 않게 너비를 제한합니다 */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.menu {
+    margin-bottom: 15px;
+}
+
+.menu button {
+    padding: 8px 15px;
+    margin: 3px;
+    font-size: 14px;
     border-radius: 6px;
     border: none;
     background: #444;
@@ -20,67 +31,73 @@ body{
     cursor: pointer;
 }
 
-/* OLD 버튼 활성화(파란색) 스타일 */
 .menu button.active {
     background: #2b6cff !important;
 }
 
-audio{
+/* 오디오 플레이어 너비 조정 */
+audio {
     width: 90%;
-    margin: 10px 0;
-    height: 30px; /* 플레이어 높이 축소 */
+    max-width: 580px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 35px;
 }
 
-.controls button{
-    padding: 6px 12px;
+.controls {
+    margin-bottom: 20px;
+}
+
+.controls button {
+    padding: 8px 15px;
     margin: 3px;
-    font-size: 13px;
-    border-radius: 4px;
+    font-size: 14px;
+    border-radius: 5px;
     border: none;
     background: #333;
     color: #fff;
 }
 
-#playlist{
-    height: 480px; /* 리스트 영역 확보 */
+/* 리스트 영역 중앙 정렬 및 높이 조절 */
+#playlist {
+    height: 500px;
     overflow-y: auto;
-    border-top: 1px solid #222;
-    margin-top: 10px;
+    border: 1px solid #222;
+    background: #1a1a1a;
+    border-radius: 8px;
 }
 
-/* 3. 곡명 리스트 폰트 및 간격 축소 */
-.song{
-    padding: 8px 10px; /* 간격 축소 */
-    font-size: 14px;   /* 폰트 축소 */
+.song {
+    padding: 12px 15px;
+    font-size: 15px;
     cursor: pointer;
     border-bottom: 1px solid #222;
-    text-align: left; /* 왼쪽 정렬 */
-    padding-left: 15px;
+    text-align: left; /* 글자는 왼쪽 정렬이 보기 편합니다 */
 }
 
-.song:hover{
+.song:hover {
     background: #222;
 }
 
-/* 재생 중인 곡 스타일 */
 .song.playing {
     color: #2b6cff;
     font-weight: bold;
+    background: #222;
 }
 
-/* 모바일 전용 최적화 */
-@media (max-width:700px){
-    .menu button{
-        font-size: 15px; /* 모바일 버튼 폰트 */
-        padding: 9px 16px;
+/* 모바일 최적화 (기존 설정 유지 및 보완) */
+@media (max-width: 700px) {
+    .menu, .controls, #playlist, audio {
+        max-width: 95%; /* 모바일에서는 화면을 꽉 채우도록 합니다 */
     }
 
-    .song{
-        font-size: 15px; /* 모바일 곡명 폰트 */
-        padding: 10px;   /* 모바일 곡 간격 */
+    .menu button {
+        font-size: 16px;
+        padding: 10px 18px;
     }
-    
-    audio {
-        width: 95%;
+
+    .song {
+        font-size: 16px;
+        padding: 15px;
     }
 }

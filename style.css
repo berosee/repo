@@ -15,7 +15,6 @@ body {
     align-items: center;
 }
 
-/* 상단 고정 영역: PC에서도 최대폭을 제한하여 구도 유지 */
 .fixed-header {
     width: 100%;
     max-width: 450px;
@@ -28,161 +27,99 @@ body {
     flex-shrink: 0;
 }
 
-.nav, .playlist-wrapper {
-    width: 92%;
-}
-
-/* --- [수정] 카테고리 네비게이션 디자인 --- */
+/* 카테고리 메뉴 */
 .menu { 
     display: flex; 
     gap: 10px; 
-    margin: 15px auto; 
+    margin: 10px auto; 
     background: var(--glass-bg); 
-    padding: 6px 15px; 
+    padding: 5px 15px; 
     border-radius: 50px; 
     border: 1px solid var(--glass-border);
     width: fit-content;
-    justify-content: center;
 }
 
 .menu button { 
-    flex: none; 
     width: 65px; 
-    text-decoration: none;
     background: #0a0a0a; 
     color: #444; 
-    padding: 6px 0; 
+    padding: 5px 0; 
     border-radius: 20px; 
     font-size: 11px; 
     font-weight: 600;
-    text-align: center;
-    transition: all 0.4s ease;
     border: 1px solid rgba(255, 255, 255, 0.03);
     cursor: pointer;
 }
 
-.menu button:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    color: #888;
-}
-
-/* 활성화된 카테고리 버튼: 네온 블루 글로우 효과 추가 */
 .menu button.active { 
     background: #003366 !important; 
     color: var(--neon-blue) !important; 
     border: 1px solid var(--neon-blue); 
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.5); /* 은은한 네온 광채 */
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
 }
 
+/* 플레이어 카드 구역 (높이 축소) */
 .player-card {
-    width: 100%;
+    width: 92%;
     background: none;
     text-align: center;
+    padding: 5px 0; /* 상하 여백 축소 */
 }
 
-/* 앨범 아트: 019.jpg 스타일 유지하되 모서리 라운드 미세 추가 */
-.album-art-container {
-    width: 100%;
-    height: 200px; 
-    margin: 0 auto 10px;
-    overflow: hidden;
-    background: #1e293b;
-    border-radius: 4px; /* 부드러운 느낌 추가 */
-    cursor: pointer; 
-    transition: transform 0.2s ease;
-}
-
-.album-art-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
+/* 곡명 디자인 */
 .song-info .title { 
     font-size: 14px; 
     font-weight: bold; 
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     color: var(--neon-blue);
-    padding: 0 15px;
-}
-
-.status-row { 
-    display: flex; 
-    justify-content: center; /* 시간 표시 중앙 정렬 */
-    align-items: center; 
-    margin-bottom: 8px;
 }
 
 .time-display { 
     font-size: 11px; 
     font-family: 'Consolas', monospace; 
     color: #777;
+    margin-bottom: 5px;
 }
 
-.progress-container { width: 92%; margin: 0 auto 12px; cursor: pointer; padding: 2px 0; }
-.progress-bg { height: 3px; background: rgba(255, 255, 255, 0.05); } /* 더 어둡게 */
+/* 프로그레스 바 */
+.progress-container { width: 100%; margin-bottom: 10px; cursor: pointer; }
+.progress-bg { height: 2px; background: rgba(255, 255, 255, 0.1); }
 .progress-fill { width: 0%; height: 100%; background: var(--neon-blue); }
 
-/* --- [수정] 컨트롤 버튼 디자인 --- */
+/* 컨트롤 버튼 구역 (높이 20% 축소 적용) */
 .controls { 
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    gap: 15px; /* 간격 최적화 */
-    padding-bottom: 10px; 
+    gap: 12px; 
+    padding: 5px 0; /* 패딩 축소 */
 }
 
-/* 알약(Pill) 모양 컨트롤 버튼 */
 .btn-nav {
     background: #1a1a1a;
     color: #888;
     border: 1px solid #222;
-    border-radius: 30px; /* 둥근 모양 */
-    padding: 6px 12px;
-    font-size: 12px;
+    border-radius: 30px;
+    padding: 5px 12px;
+    font-size: 11px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 4px;
-    transition: all 0.3s ease;
 }
 
-.btn-nav:hover {
-    background: #222;
-    border-color: #333;
-    color: #fff;
-}
-
-.btn-nav .icon { font-size: 14px; }
-.btn-nav .text { font-weight: 500; }
-
-/* 랜덤 버튼 별도 스타일 */
-.btn-random {
-    background: #0f172a; /* 약간 파란 톤 배경 */
-    border-color: rgba(74, 124, 255, 0.2);
-    color: #aaa;
-}
-
-.btn-random:hover {
-    background: #1e293b;
-    border-color: rgba(74, 124, 255, 0.4);
-    color: var(--deep-blue);
-}
-
-/* 재생/일시정지 버튼 (기존 유지) */
 .btn-play-box { 
     border: 1.5px solid var(--neon-blue); 
     border-radius: 50%; 
-    width: 42px; height: 42px;
+    width: 38px; height: 38px; /* 크기 축소 */
     display: flex; align-items: center; justify-content: center;
     cursor: pointer;
     background: #0a0a0a;
 }
 
-#btnIcon { font-size: 18px !important; color: var(--neon-blue); }
+#btnIcon { font-size: 16px !important; color: var(--neon-blue); }
 
-/* 하단 리스트 영역 */
+/* 리스트 영역 */
 .playlist-wrapper { 
     flex: 1; 
     width: 100%;
@@ -190,16 +127,19 @@ body {
     overflow-y: auto; 
     background: rgba(0,0,0,0.4); 
     border-radius: 20px 20px 0 0;
-    -webkit-overflow-scrolling: touch;
-}    
+}
+
 .playlist-table { width: 100%; border-collapse: collapse; }
 .playlist-table td { 
     padding: 12px 20px; 
-    font-size: 13px; 
+    font-size: 14px; 
     border-bottom: 1px solid rgba(255,255,255,0.02); 
-    color: #777; cursor: pointer; 
-}    
-.playlist-table tr.active td { 
+    color: #888; 
+    cursor: pointer; 
+    text-align: left;
+}
+
+.playlist-table tr.playing td { 
     color: var(--neon-blue); 
     background: rgba(0, 210, 255, 0.08); 
     font-weight: bold;

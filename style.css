@@ -1,103 +1,206 @@
-body {
-    background: #111;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    padding-top: 20px;
+:root {
+    --neon-blue: #00d2ff;
+    --deep-blue: #4a7cff;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
 }
 
-/* PC에서 전체적인 균형을 잡아주는 컨테이너 설정 */
-.menu, .controls, #playlist, audio {
-    max-width: 600px; /* PC에서 너무 퍼지지 않게 너비를 제한합니다 */
-    margin-left: auto;
-    margin-right: auto;
+html, body { height: 100%; margin: 0; padding: 0; overflow: hidden; background: #121212; }
+
+body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 상단 고정 영역: PC에서도 최대폭을 제한하여 구도 유지 */
+.fixed-header {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #121212;
+    z-index: 100;
+    padding-bottom: 5px;
+    flex-shrink: 0;
+}
+
+.nav, .playlist-wrapper {
+    width: 92%;
+}
+
+/* --- [수정] 카테고리 네비게이션 디자인 --- */
+.menu { 
+    display: flex; 
+    gap: 10px; 
+    margin: 15px auto; 
+    background: var(--glass-bg); 
+    padding: 6px 15px; 
+    border-radius: 50px; 
+    border: 1px solid var(--glass-border);
+    width: fit-content;
+    justify-content: center;
+}
+
+.menu button { 
+    flex: none; 
+    width: 65px; 
+    text-decoration: none;
+    background: #0a0a0a; 
+    color: #444; 
+    padding: 6px 0; 
+    border-radius: 20px; 
+    font-size: 11px; 
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+}
+
+.menu button:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #888;
+}
+
+/* 활성화된 카테고리 버튼: 네온 블루 글로우 효과 추가 */
+.menu button.active { 
+    background: #003366 !important; 
+    color: var(--neon-blue) !important; 
+    border: 1px solid var(--neon-blue); 
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.5); /* 은은한 네온 광채 */
+}
+
+.player-card {
+    width: 100%;
+    background: none;
+    text-align: center;
+}
+
+/* 앨범 아트: 019.jpg 스타일 유지하되 모서리 라운드 미세 추가 */
+.album-art-container {
+    width: 100%;
+    height: 200px; 
+    margin: 0 auto 10px;
+    overflow: hidden;
+    background: #1e293b;
+    border-radius: 4px; /* 부드러운 느낌 추가 */
+    cursor: pointer; 
+    transition: transform 0.2s ease;
+}
+
+.album-art-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
 }
 
-.menu {
-    margin-bottom: 15px;
+.song-info .title { 
+    font-size: 14px; 
+    font-weight: bold; 
+    margin-bottom: 8px;
+    color: var(--neon-blue);
+    padding: 0 15px;
 }
 
-.menu button {
-    padding: 8px 15px;
-    margin: 3px;
-    font-size: 14px;
-    border-radius: 6px;
-    border: none;
-    background: #444;
-    color: white;
+.status-row { 
+    display: flex; 
+    justify-content: center; /* 시간 표시 중앙 정렬 */
+    align-items: center; 
+    margin-bottom: 8px;
+}
+
+.time-display { 
+    font-size: 11px; 
+    font-family: 'Consolas', monospace; 
+    color: #777;
+}
+
+.progress-container { width: 92%; margin: 0 auto 12px; cursor: pointer; padding: 2px 0; }
+.progress-bg { height: 3px; background: rgba(255, 255, 255, 0.05); } /* 더 어둡게 */
+.progress-fill { width: 0%; height: 100%; background: var(--neon-blue); }
+
+/* --- [수정] 컨트롤 버튼 디자인 --- */
+.controls { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 15px; /* 간격 최적화 */
+    padding-bottom: 10px; 
+}
+
+/* 알약(Pill) 모양 컨트롤 버튼 */
+.btn-nav {
+    background: #1a1a1a;
+    color: #888;
+    border: 1px solid #222;
+    border-radius: 30px; /* 둥근 모양 */
+    padding: 6px 12px;
+    font-size: 12px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
 }
 
-.menu button.active {
-    background: #2b6cff !important;
-}
-
-/* 오디오 플레이어 너비 조정 */
-audio {
-    width: 90%;
-    max-width: 580px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    height: 35px;
-}
-
-.controls {
-    margin-bottom: 20px;
-}
-
-.controls button {
-    padding: 8px 15px;
-    margin: 3px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: none;
-    background: #333;
+.btn-nav:hover {
+    background: #222;
+    border-color: #333;
     color: #fff;
 }
 
-/* 리스트 영역 중앙 정렬 및 높이 조절 */
-#playlist {
-    height: 500px;
-    overflow-y: auto;
-    border: 1px solid #222;
-    background: #1a1a1a;
-    border-radius: 8px;
+.btn-nav .icon { font-size: 14px; }
+.btn-nav .text { font-weight: 500; }
+
+/* 랜덤 버튼 별도 스타일 */
+.btn-random {
+    background: #0f172a; /* 약간 파란 톤 배경 */
+    border-color: rgba(74, 124, 255, 0.2);
+    color: #aaa;
 }
 
-.song {
-    padding: 12px 15px;
-    font-size: 15px;
+.btn-random:hover {
+    background: #1e293b;
+    border-color: rgba(74, 124, 255, 0.4);
+    color: var(--deep-blue);
+}
+
+/* 재생/일시정지 버튼 (기존 유지) */
+.btn-play-box { 
+    border: 1.5px solid var(--neon-blue); 
+    border-radius: 50%; 
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
     cursor: pointer;
-    border-bottom: 1px solid #222;
-    text-align: left; /* 글자는 왼쪽 정렬이 보기 편합니다 */
+    background: #0a0a0a;
 }
 
-.song:hover {
-    background: #222;
-}
+#btnIcon { font-size: 18px !important; color: var(--neon-blue); }
 
-.song.playing {
-    color: #2b6cff;
+/* 하단 리스트 영역 */
+.playlist-wrapper { 
+    flex: 1; 
+    width: 100%;
+    max-width: 450px; 
+    overflow-y: auto; 
+    background: rgba(0,0,0,0.4); 
+    border-radius: 20px 20px 0 0;
+    -webkit-overflow-scrolling: touch;
+}    
+.playlist-table { width: 100%; border-collapse: collapse; }
+.playlist-table td { 
+    padding: 12px 20px; 
+    font-size: 13px; 
+    border-bottom: 1px solid rgba(255,255,255,0.02); 
+    color: #777; cursor: pointer; 
+}    
+.playlist-table tr.active td { 
+    color: var(--neon-blue); 
+    background: rgba(0, 210, 255, 0.08); 
     font-weight: bold;
-    background: #222;
-}
-
-/* 모바일 최적화 (기존 설정 유지 및 보완) */
-@media (max-width: 700px) {
-    .menu, .controls, #playlist, audio {
-        max-width: 95%; /* 모바일에서는 화면을 꽉 채우도록 합니다 */
-    }
-
-    .menu button {
-        font-size: 16px;
-        padding: 10px 18px;
-    }
-
-    .song {
-        font-size: 16px;
-        padding: 15px;
-    }
 }
